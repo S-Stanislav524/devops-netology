@@ -1,3 +1,4 @@
 will_be_moved
 second line
 second line git diff
+add line
