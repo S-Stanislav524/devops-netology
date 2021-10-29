@@ -5,3 +5,4 @@
 4. Любые файлы в любой директории с расширение .tfvars
 5. Любые файлы в любой директории с именем override.tf или override.tf.json или имеющие в конце файла симовлы _override.tf или _override.tf.json
 6. Файлы в любой директории с именем .terraformrc или terraform.rc
+New line
