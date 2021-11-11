@@ -7,6 +7,7 @@
 3. У коммита b8d720 2 родителя . git log --pretty=%p -n 1 b8d720    
 56cd7859e 9ea88f22f
 4. git log v0.12.23..v0.12.24 --pretty="%h - %s"
+
 33ff1c03b - v0.12.24
 b14b74c49 - [Website] vmc provider links
 3f235065b - Update CHANGELOG.md
@@ -21,11 +22,13 @@ dd01a3507 - Update CHANGELOG.md
 8c928e835
 6. git grep -p "globalPluginDirs(" 
    git log -L :globalPluginDirs:plugins.go --pretty="hash= %h" | grep "hash="
+
 hash= 78b122055
 hash= 52dbf9483
 hash= 41ab0aef7
 hash= 66ebff90c
 hash= 8364383c3
 
-7.git log -S "func synchronizedWriters(" --pretty=format:"%an %s %ad"
+7. git log -S "func synchronizedWriters(" --pretty=format:"%an %s %ad"
+
 Martin Atkins
