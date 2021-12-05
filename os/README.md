@@ -1,22 +1,23 @@
 1. ``chdir("/tmp")``  
 2. ``/usr/share/misc/magic.mgc``  
-3. `` screen  
-ping localhost > /tmp/log  
-rm /tmp/log  
-lsof +L1  
-> /proc/1536/fd/1  
-``  
+3. ```bash
+      screen  
+      ping localhost > /tmp/log
+      rm /tmp/log
+      lsof +L1  
+      echo '' > /proc/1536/fd/1  
+   ```
 4. Зомби не занимают ресурсов, но блокируют записи в таблице процессов  
-5. ``
-PID    COMM               FD ERR PATH  
-1055   mysqld            263   0 /tmp/#sql_41f_0.MAI  
-1055   mysqld            264   0 /tmp/#sql_41f_0.MAD  
-1055   mysqld            263   0 /tmp  
-1055   mysqld            264   0 #sql_41f_0.MAI  
-1055   mysqld            263   0 /tmp/#sql_41f_0.MAD  
-``  
-6. ``uname({sysname="Linux", nodename="k8s", ...}) = 0``  
-``Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}.``  
+5. ```
+      PID    COMM               FD ERR PATH  
+      1055   mysqld            263   0 /tmp/#sql_41f_0.MAI  
+      1055   mysqld            264   0 /tmp/#sql_41f_0.MAD  
+      1055   mysqld            263   0 /tmp  
+      1055   mysqld            264   0 #sql_41f_0.MAI  
+      1055   mysqld            263   0 /tmp/#sql_41f_0.MAD  
+   ```  
+6. `uname({sysname="Linux", nodename="k8s", ...}) = 0`  
+`Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}.`  
 7. ``&&`` - вторая команда выполница только поле успешного выполнения первой, ``;``- выполняются несколько команд одновреммено последовательно, не зависимо от успеха или отказа других команд  
 ``set -e`` останавливает выполнение скрипта, если команда или конвейер имеет ошибку и обрабатывает статус самой последней команды в конвеере.  
 Имеет смысл использовать ``&&`` в  bash скриптах, т.к. ``set -e`` обрабатывает только выход последней команды, а ``&&`` можно  встраивать в пайп и обрабатывать выход от команд   
