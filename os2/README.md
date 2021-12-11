@@ -12,7 +12,7 @@
 	[Service]
 	EnvironmentFile=-/etc/node_exporter.conf
 	KillMode=process
-	ExecStart=/usr/sbin/node_exporter
+	ExecStart=/usr/sbin/node_exporter %I
 	Restart=Always
 	
 	[Install]
