@@ -77,8 +77,8 @@
 	Syncing disks.
 ``` 
 5. ```bash
-root@k8s:~/devops-netology# sfdisk -d /dev/sda > ./fs/partitions-sda.txt
-root@k8s:~/devops-netology# sfdisk -d /dev/sdb < ./fs/partitions-sda.txt
+	root@k8s:~/devops-netology# sfdisk -d /dev/sda > ./fs/partitions-sda.txt
+	root@k8s:~/devops-netology# sfdisk -d /dev/sdb < ./fs/partitions-sda.txt
    ```
 6. `mdadm --create --verbose /dev/md0 -l 1 -n 2 /dev/sda1 /dev/sdb1`
 7. `mdadm --create --verbose /dev/md1 -l 0 -n 2 /dev/sda2 /dev/sdb2`
@@ -102,9 +102,9 @@ root@k8s:~/devops-netology# sfdisk -d /dev/sdb < ./fs/partitions-sda.txt
    ```
 10. ```bash
 	root@k8s:~/devops-netology# lvcreate -L 100M vg01 /dev/md1
-	  Logical volume "lvol0" created
-   ```
-11.  `mkfs.ext4 /dev/vg01/lvol0`
+	Logical volume "lvol0" created
+    ```  
+11. ` mkfs.ext4 /dev/vg01/lvol0 `
 12. ```bash
 	mkdir /tmp/new
 	mount /dev/vg01/lvol0 /tmp/new
@@ -117,37 +117,37 @@ root@k8s:~/devops-netology# sfdisk -d /dev/sdb < ./fs/partitions-sda.txt
 	-rw-r--r-- 1 root root 22719572 Dec 11 13:53 test.gz
 ```
 14. ```bash
- lsblk
-NAME                      MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
-loop0                       7:0    0 55.5M  1 loop  /snap/core18/2253
-loop1                       7:1    0 55.5M  1 loop  /snap/core18/2246
-loop2                       7:2    0 10.3M  1 loop  /snap/kubectl/2120
-loop3                       7:3    0 61.8M  1 loop  /snap/core20/1242
-loop4                       7:4    0 61.9M  1 loop  /snap/core20/1270
-loop5                       7:5    0 10.4M  1 loop  /snap/kubectl/2177
-loop6                       7:6    0 73.1M  1 loop  /snap/lxd/21858
-loop7                       7:7    0 42.2M  1 loop  /snap/snapd/14066
-loop8                       7:8    0 73.1M  1 loop  /snap/lxd/21902
-loop9                       7:9    0 43.3M  1 loop  /snap/snapd/14295
-sda                         8:0    0  2.5G  0 disk  
-├─sda1                      8:1    0    2G  0 part  
-│ └─md0                     9:0    0    2G  0 raid1 
-└─sda2                      8:2    0  511M  0 part  
-  └─md1                     9:1    0 1018M  0 raid0 
-    └─vg01-lvol0          253:1    0  100M  0 lvm   /tmp/new
-sdb                         8:16   0  2.5G  0 disk  
-├─sdb1                      8:17   0    2G  0 part  
-│ └─md0                     9:0    0    2G  0 raid1 
-└─sdb2                      8:18   0  511M  0 part  
-  └─md1                     9:1    0 1018M  0 raid0 
-    └─vg01-lvol0          253:1    0  100M  0 lvm   /tmp/new
-sdc                         8:32   0   80G  0 disk  
-├─sdc1                      8:33   0    1M  0 part  
-├─sdc2                      8:34   0    1G  0 part  /boot
-└─sdc3                      8:35   0   79G  0 part  
-  └─ubuntu--vg-ubuntu--lv 253:0    0 39.5G  0 lvm   /
-sr0                        11:0    1 1024M  0 rom   
- ```
+ 	lsblk
+	NAME                      MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
+	loop0                       7:0    0 55.5M  1 loop  /snap/core18/2253
+	loop1                       7:1    0 55.5M  1 loop  /snap/core18/2246
+	loop2                       7:2    0 10.3M  1 loop  /snap/kubectl/2120
+	loop3                       7:3    0 61.8M  1 loop  /snap/core20/1242
+	loop4                       7:4    0 61.9M  1 loop  /snap/core20/1270
+	loop5                       7:5    0 10.4M  1 loop  /snap/kubectl/2177
+	loop6                       7:6    0 73.1M  1 loop  /snap/lxd/21858
+	loop7                       7:7    0 42.2M  1 loop  /snap/snapd/14066
+	loop8                       7:8    0 73.1M  1 loop  /snap/lxd/21902
+	loop9                       7:9    0 43.3M  1 loop  /snap/snapd/14295
+	sda                         8:0    0  2.5G  0 disk  
+	├─sda1                      8:1    0    2G  0 part  
+	│ └─md0                     9:0    0    2G  0 raid1 
+	└─sda2                      8:2    0  511M  0 part  
+  	  └─md1                     9:1    0 1018M  0 raid0 
+	    └─vg01-lvol0          253:1    0  100M  0 lvm   /tmp/new
+	sdb                         8:16   0  2.5G  0 disk  
+	├─sdb1                      8:17   0    2G  0 part  
+	│ └─md0                     9:0    0    2G  0 raid1 
+	└─sdb2                      8:18   0  511M  0 part  
+  	  └─md1                     9:1    0 1018M  0 raid0 
+	    └─vg01-lvol0          253:1    0  100M  0 lvm   /tmp/new
+	sdc                         8:32   0   80G  0 disk  
+	├─sdc1                      8:33   0    1M  0 part  
+	├─sdc2                      8:34   0    1G  0 part  /boot
+	└─sdc3                      8:35   0   79G  0 part  
+  	  └─ubuntu--vg-ubuntu--lv 253:0    0 39.5G  0 lvm   /
+	sr0                        11:0    1 1024M  0 rom   
+    ```
 15. ```bash
         root@k8s:~/devops-netology# gzip -t /tmp/new/test.gz
         root@k8s:~/devops-netology# echo $?
