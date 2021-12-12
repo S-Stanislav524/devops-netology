@@ -1,8 +1,9 @@
 1. `HTTP/1.1 301 Moved Permanently` - запрошенный документ был окончательно перенесен на новый URI, указанный в поле Location заголовка
-2. запрос `GET	http://stackoverflow.com/` был самым долгим 692 мс
-3. `176.99.65.103`
-4. `OtradnoeNet Ltd.`, `AS44030`
-5. ```bash
+2. запрос `GET	http://stackoverflow.com/` был самым долгим 692 мс  
+![alt text](https://github.com/S-Stanislav524/devops-netology/blob/main/net1/screen.jpg?raw=true)
+4. `176.99.65.103`
+5. `OtradnoeNet Ltd.`, `AS44030`
+6. ```bash
 	root@k8s:~/devops-netology# traceroute -An 8.8.8.8
 	traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
 	 1  192.168.1.2 [*]  0.394 ms  0.298 ms  0.294 ms
