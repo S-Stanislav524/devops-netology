@@ -216,5 +216,6 @@ udp6       0      0 [::]:sunrpc             [::]:*                              
 ```
 Пример: systemd-resolve - слушает 53 порт (Dns -протокол), выполняет разрешения Dns имен для локальных приложений. ONC RPC (111 порт) протокол слушает служба, преднозначен для корректной работы Nfs.  
 
-5. 
+5. ![alt text](https://github.com/S-Stanislav524/devops-netology/blob/main/net3/net.jpg?raw=true)
+
 
