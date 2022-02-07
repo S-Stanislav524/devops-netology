@@ -169,7 +169,22 @@ Paths: (22 available, best #21, table default)
       path 7FE01D8BAAE8 RPKI State valid
       rx pathid: 0, tx pathid: 0
 ```
-2. 
+2.
+```bash
+cat /etc/netplan/02-dummy.yaml 
+network:
+  version: 2
+  renderer: networkd
+  bridges:
+    dummy0:
+      dhcp4: no
+      dhcp6: no
+      accept-ra: no
+      interfaces: [ ]
+      addresses:
+        - 10.2.2.2/32
+```
+
 ```bash
 ~/devops-netology/net3# route
 Kernel IP routing table
