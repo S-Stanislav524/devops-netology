@@ -40,7 +40,7 @@ do
         curl https://localhost:4757
         if (($? != 0));
         then
-                date >> curl.log
+                date > curl.log
         else	
 		break
         fi
@@ -52,11 +52,14 @@ done
 
 ### Ваш скрипт:
 ```bash
+#/bin/bash
+services=(173.194.222.113 87.250.250.242 192.168.0.1)
 for ((i=1; i < 6; i++))
 do
-nc -zvw3 173.194.222.113 80 >> test.log
-nc -zvw3 87.250.250.242 80 >> test.log
-nc -zvw3 192.168.0.1 80 >> test.log
+        for j in ${services[@]}
+        do
+                nc -zvw3 $j 80 &>> ./test.log
+        done
 done
 ```
 
@@ -65,27 +68,20 @@ done
 
 ### Ваш скрипт:
 ```bash
-for ((i=1; i < 6; i++))
+
+#/bin/bash
+services=(173.194.222.113 87.250.250.242 192.168.0.1)
+while :
 do
-nc -zvw3 173.194.222.113 80
-if (($? != 0));
-then
-   echo "173.194.222.113" >> eror.log
-   break        
-fi
-nc -zvw3 87.250.250.242 80
-if (($? != 0));
-then
-   echo "87.250.250.242" >> eror.log
-   break        
-fi
-nc -zvw3 192.168.0.1 80
-if (($? != 0));
-then
-   echo "192.168.0.1" >> eror.log
-   break        
-fi
-done
+        for j in ${services[@]}
+        do
+                nc -zvw3 $j 80
+                if (($? != 0)); then
+                        echo $j >> ./error.log
+                        exit 1
+                fi
+        done
+do
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
