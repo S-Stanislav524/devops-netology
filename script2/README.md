@@ -102,31 +102,28 @@ python ./test.py ~/devops-netology/
 #!/usr/bin/env python3
 import os
 import socket
-from urllib2 import urlopen
-with open("./test.txt", "r+w") as file_:
-        NewStr = ""
-        for item in file_:
-                words = item.split()
-                if len(words) < 1:
-                        continue
-                NewIP = socket.gethostbyname(words[0])
-                print(words[0] + " - " + NewIP)
-                try:
-                        response = urlopen("http://" + words[0],timeout=2)
-                except:
-                        print("[ERROR] http://" +  words[0] + " IP mismatch: " + words[1] + " " + NewIP)
-                NewStr += words[0] + "\t" + NewIP + "\n"
-        file_.seek(0)
-        file_.write(NewStr)
+with open("./test.txt", "r+w") as _file:
+        NewSrv = {}
+        for str in _file.readlines():
+                key,val = str.strip().split(':')
+                NewIP = socket.gethostbyname(key)
+                print(key + " - " + NewIP)
+                if (NewIP != val):
+                        print("[ERROR] http://" + key  + " IP mismatch: " + val + " " + NewIP)
+                NewSrv[key] = NewIP
+        _file.seek(0)
+        for key,vai in NewSrv.items():
+                _file.write('{}:{}\n'.format(key,val))
 
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-google.com - 64.233.165.102
+google.com - 173.194.73.102
+[ERROR] http://google.com IP mismatch: 173.194.222.138 173.194.73.102
 mail.google.com - 64.233.161.83
-drive.google.com - 192.168.250.250
-[ERROR] http://drive.google.com IP mismatch: 64.233.165.194 192.168.250.250
+[ERROR] http://mail.google.com IP mismatch: 64.233.161.17 64.233.161.83
+drive.google.com - 74.125.131.194
 
 ```
 
