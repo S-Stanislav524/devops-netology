@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      POSTGRES_DB: "netology"
+      POSTGRES_USER: "netology"
+      MYSQL_ROOT_PASSWORD: "pwdnetology"
+      PGDATA: /pgdata
+    ports:
+      - "3306:3306"
+    volumes:
+      - mydbdata:/var/lib/mysql:rw
+      - ./test_dump.s:ro
+volumes:
+  mydbdata:
