@@ -136,30 +136,39 @@ SET orderid=(select id from orders where name = 'Гитара')
 WHERE fname = 'Иоганн Себастьян Бах';
 ```
 ```
-test_db=# select * from client c where c.orderid is not null;
- id |        fname         | country | orderid 
-----+----------------------+---------+---------
-  1 | Иванов Иван Иванович | usa     |       1
-  4 | Иоганн Себастьян Бах | japan   |       5
-  3 | Петров Петр Петрович | Canada  |       4
+test_db=# select c.fname, o."name"  from client c 
+        inner join orders o on c.orderid = o.id;
+        fname         |  name   
+----------------------+---------
+ Иванов Иван Иванович | шоколад
+ Иоганн Себастьян Бах | Гитара
+ Петров Петр Петрович | Монитор
 (3 rows)
+
 ```
 5.
 ```
-test_db=# explain select * from client c where c.orderid is not null;
-                         QUERY PLAN                          
--------------------------------------------------------------
- Seq Scan on client c  (cost=0.00..11.70 rows=169 width=444)
-   Filter: (orderid IS NOT NULL)
+test_db=# explain select c.fname, o."name"  from client c 
+        inner join orders o on c.orderid = o.id;
+                               QUERY PLAN                                
+-------------------------------------------------------------------------
+ Hash Join  (cost=17.20..29.36 rows=170 width=436)
+   Hash Cond: (c.orderid = o.id)
+   ->  Seq Scan on client c  (cost=0.00..11.70 rows=170 width=222)
+   ->  Hash  (cost=13.20..13.20 rows=320 width=222)
+         ->  Seq Scan on orders o  (cost=0.00..13.20 rows=320 width=222)
+(5 rows)
+
 ```
+Hash join - ланировщик выбирает соединение по хешу, при котором строки одной таблицы записываются в хеш-таблицу в памяти, после чего сканируется другая таблица и для каждой её строки проверяется соответствие по хеш-таблице  
 cost - стоимость запуска; время которое проходит от начала запуска до вывода данных    
 rows - ожижаемое количество строк   
 width - ожидаемый средний размер строк  
-Filter: (orderid IS NOT NULL) - используемый фильтр  
+Вначале по полученным данным из orders конструируется хэш-таблица, далее она передается узлу Hash Join, который читает строки из узла внешнего потомка и проверяет их по этой хеш-таблице. 
 
 6. 
 ```
-pg_dumpall -U netology -c > /backup/pgdump.bak
-psql -f /backup/pgdump.bak postgres -U netology
+pg_dump -c -U netology test_db > /backup/db.dump
+pg_restore -U netology -C -d test_db -Ft /backup/db.dump
 ```
 
