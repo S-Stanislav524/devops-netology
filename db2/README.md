@@ -158,7 +158,7 @@ width - ожидаемый средний размер строк
 Filter: (orderid IS NOT NULL) - используемый фильтр
 5. 
 ```
-
+pg_dumpall -U netology -c > /backup/pgdump.bak
 psql -f /backup/pgdump.bak postgres -U netology
 ```
 
