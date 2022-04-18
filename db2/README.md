@@ -21,12 +21,7 @@
 ```sql
 create database test_db;
 \c test_db;
-CREATE user "test-admin-user" with password 'pwdnetology';
-GRANT ALL PRIVILEGES ON DATABASE test_db to "test-admin-user"; 
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "test-admin-user";
--- test-simple-user
-CREATE USER "test-simple-user" WITH PASSWORD 'pwdnetology';
-GRANT UPDATE, SELECT, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO "test-simple-user";
+
 create table orders (
     id        	SERIAL PRIMARY key,
     name        varchar(100) NOT NULL,
@@ -39,6 +34,13 @@ create table client (
     orderId		INTEGER REFERENCES orders (id)
 );
 CREATE INDEX ON client ((lower(country)));
+
+CREATE user "test-admin-user" with password 'pwdnetology';
+GRANT ALL PRIVILEGES ON DATABASE test_db to "test-admin-user"; 
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "test-admin-user";
+-- test-simple-user
+CREATE USER "test-simple-user" WITH PASSWORD 'pwdnetology';
+GRANT UPDATE, SELECT, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO "test-simple-user";
 ```
 ```
 SELECT datname FROM pg_database;
