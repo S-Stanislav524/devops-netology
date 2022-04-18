@@ -23,7 +23,7 @@ Binary data as:         Hexadecimal
 Uptime:                 8 min 18 sec
 ```
 ```sql
-\r testbd
+\r test_db
 
 mysql> SELECT table_name FROM information_schema.tables WHERE table_schema = 'test_db';
 +------------+
