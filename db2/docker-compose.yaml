@@ -1,0 +1,18 @@
+
+version: "3.3"
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: "netology"
+      POSTGRES_USER: "netology"
+      POSTGRES_PASSWORD: "pwdnetology"
+      PGDATA: /pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/pgdata:rw
+      - pgbackup:/backup:rw
+volumes:
+  pgdata:
+  pgbackup:

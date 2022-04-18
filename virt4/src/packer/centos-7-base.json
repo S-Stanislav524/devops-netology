@@ -4,11 +4,11 @@
       "disk_type": "network-nvme",
       "folder_id": "b1gso856flmbahojrcvu",
       "image_description": "by packer",
-      "image_family": "ubuntu",
-      "image_name": "ubuntu-20base",
-      "source_image_family": "ubuntu-2004-lts",
-      "ssh_username": "ubuntu",
-      "subnet_id": "enpoq5tn7ki41o523ro3",
+      "image_family": "centos",
+      "image_name": "centos-7-base",
+      "source_image_family": "centos-7",
+      "ssh_username": "centos",
+      "subnet_id": "e9bbj1agkoib4d5s4ar3",
       "token": "AQAAAABeH2jhAATuwe0LxgNgq0O4qH-xbsp3BiY",
       "type": "yandex",
       "use_ipv4_nat": true,
@@ -18,9 +18,10 @@
   "provisioners": [
     {
       "inline": [
-        "sudo apt -y update",
-        "sudo apt -y install bridge-utils bind-utils iptables curl net-tools tcpdump rsync telnet openssh-server"
+        "sudo yum -y update",
+        "sudo yum -y install bridge-utils bind-utils iptables curl net-tools tcpdump rsync telnet openssh-server"
       ],
       "type": "shell"
     }
   ]
+}
