@@ -155,8 +155,9 @@ test_db=# explain select * from client c where c.orderid is not null;
 cost - стоимость запуска; время которое проходит от начала запуска до вывода данных    
 rows - ожижаемое количество строк   
 width - ожидаемый средний размер строк  
-Filter: (orderid IS NOT NULL) - используемый фильтр
-5. 
+Filter: (orderid IS NOT NULL) - используемый фильтр  
+
+6. 
 ```
 pg_dumpall -U netology -c > /backup/pgdump.bak
 psql -f /backup/pgdump.bak postgres -U netology
