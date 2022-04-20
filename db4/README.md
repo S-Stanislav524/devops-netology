@@ -26,7 +26,6 @@ INSERT INTO orders (id,title,price) SELECT id,title,price FROM temp_table;
 COMMIT;
 ```
 * можно ели бы при создании таблицы было бы указано `PARTITION BY RANGE (price);`
-4. 
 ```sql
 ALTER TABLE orders_1 ADD CONSTRAINT orders_1_ UNIQUE (title, price);
 ALTER TABLE orders_2 ADD CONSTRAINT orders_2_ UNIQUE (title, price);
